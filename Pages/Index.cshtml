@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "API Tester";
+}
+
+<div class="container">
+    <h2>API Tester</h2>
+    <form method="post">
+        <label>Request URL:</label>
+        <input type="text" name="Url" value="@Model.Url" style="width:100%" />
+
+        <label>HTTP Method:</label>
+        <select name="Method">
+            <option>GET</option>
+            <option>POST</option>
+            <option>PUT</option>
+            <option>DELETE</option>
+        </select>
+
+        <label>Headers:</label>
+        <textarea name="Headers" style="width:100%;height:100px">@Model.Headers</textarea>
+
+        <label>Token:</label>
+        <textarea name="Token" style="width:100%;height:100px">@Model.Token</textarea>
+
+        <label>Body (JSON):</label>
+        <textarea name="Body" style="width:100%;height:150px">@Model.Body</textarea>
+
+        <button type="submit">Send Request</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.Response))
+    {
+    <h3>Response:</h3>
+    <pre>@Model.Response</pre>
+    }
+</div>
