@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
@@ -8,13 +7,13 @@ namespace ApiTesterWeb.Pages
 {
     public class IndexModel : PageModel
     {
-        [BindProperty] public string Url { get; set; } = "";
+    [BindProperty] public new string Url { get; set; } = "Input URL here";
         [BindProperty] public string Method { get; set; } = "GET";
-        [BindProperty] public string Headers { get; set; } = "";
-        [BindProperty] public string Body { get; set; } = "";
-        [BindProperty] public string Token { get; set; } = "";
+        [BindProperty] public string Headers { get; set; } = "Input headers here (one per line, e.g., Key: Value)";
+        [BindProperty] public string Body { get; set; } = "Input body here";
+        [BindProperty] public string Token { get; set; } = "Input token here";
 
-        public string Response { get; set; } = "";
+    public new string Response { get; set; } = "";
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -23,7 +22,7 @@ namespace ApiTesterWeb.Pages
                 using var client = new HttpClient();
                 var request = new HttpRequestMessage(new HttpMethod(Method), Url);
 
-                // ´¦Àí Headers
+                // Headers
                 if (!string.IsNullOrEmpty(Headers))
                 {
                     var headerLines = Headers.Split('\n', StringSplitOptions.RemoveEmptyEntries);
@@ -48,11 +47,11 @@ namespace ApiTesterWeb.Pages
                     request.Content = new StringContent(Body ?? "", Encoding.UTF8, "application/json");
                 }
 
-                // ·¢ËÍÇëÇó
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 var response = await client.SendAsync(request);
                 var responseText = await response.Content.ReadAsStringAsync();
 
-                // ¸ñÊ½»¯ JSON
+                // ï¿½ï¿½Ê½ï¿½ï¿½ JSON
                 if (response.Content.Headers.ContentType?.MediaType == "application/json")
                 {
                     try

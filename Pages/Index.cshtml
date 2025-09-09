@@ -4,11 +4,49 @@
     ViewData["Title"] = "API Tester";
 }
 
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px; /* 控制每个表单项之间的间距 */
+        max-width: 800px; /* 限制宽度，避免太长 */
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    input, select, textarea, button {
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    button {
+        margin-top: 12px;
+        padding: 8px 16px;
+        font-weight: bold;
+        background-color: #f3f3f3;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #e2e2e2;
+    }
+</style>
+
 <div class="container">
     <h2>API Tester</h2>
     <form method="post">
         <label>Request URL:</label>
         <input type="text" name="Url" value="@Model.Url" style="width:100%" />
+
+        <br />
 
         <label>HTTP Method:</label>
         <select name="Method">
@@ -18,14 +56,22 @@
             <option>DELETE</option>
         </select>
 
+        <br />
+
         <label>Headers:</label>
         <textarea name="Headers" style="width:100%;height:100px">@Model.Headers</textarea>
+
+        <br />
 
         <label>Token:</label>
         <textarea name="Token" style="width:100%;height:100px">@Model.Token</textarea>
 
+        <br />
+
         <label>Body (JSON):</label>
         <textarea name="Body" style="width:100%;height:150px">@Model.Body</textarea>
+
+        <br />
 
         <button type="submit">Send Request</button>
     </form>
