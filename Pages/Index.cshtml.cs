@@ -15,6 +15,8 @@ namespace ApiTesterWeb.Pages
 
     public new string Response { get; set; } = "";
 
+    public bool IsSucceeded { get; set; } = false;
+
         public async Task<IActionResult> OnPostAsync()
         {
             try
@@ -61,6 +63,8 @@ namespace ApiTesterWeb.Pages
                     }
                     catch { }
                 }
+
+                IsSucceeded = response.IsSuccessStatusCode;
 
                 Response = $"Status: {(int)response.StatusCode} {response.ReasonPhrase}\n\n{responseText}";
             }

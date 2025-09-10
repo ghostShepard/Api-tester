@@ -5,6 +5,17 @@
 }
 
 <style>
+
+.text-success {
+    color: green;
+    font-weight: bold;
+}
+
+.text-danger {
+    color: red;
+    font-weight: bold;
+}
+
     form {
         display: flex;
         flex-direction: column;
@@ -85,11 +96,13 @@
         <button type="submit">Send Request</button>
     </form>
 
-    @if (!string.IsNullOrEmpty(Model.Response))
-    {
-        <h3>Response:</h3>
-        <pre>@Model.Response</pre>
-    }
+@if (!string.IsNullOrEmpty(Model.Response))
+{
+    <h3>Response:</h3>
+    <pre class="@(Model.IsSucceeded ? "text-success" : "text-danger")">
+        @Model.Response
+    </pre>
+}
 </div>
 
 <script>
