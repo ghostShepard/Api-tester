@@ -47,11 +47,11 @@ namespace ApiTesterWeb.Pages
                     request.Content = new StringContent(Body ?? "", Encoding.UTF8, "application/json");
                 }
 
-                // ��������
+                // Send request
                 var response = await client.SendAsync(request);
                 var responseText = await response.Content.ReadAsStringAsync();
 
-                // ��ʽ�� JSON
+                // Format JSON
                 if (response.Content.Headers.ContentType?.MediaType == "application/json")
                 {
                     try
